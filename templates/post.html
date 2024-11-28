@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/post.css">
+</head>
+<body>
+    <div class="sidebar">
+        <nav>
+            <div class="welcome-message">
+                <h1>My Forum</h1>
+            </div>
+            <ul class="nav-links sidebar-menu">
+                <li><a href="/">Home</a></li>
+            </ul>
+        </nav>
+    </div>
+    <main>
+        <div class="main-content">
+            <div class="container">
+                <h2>Create a New Post</h2>
+            </div>
+            <form action="/submit_post" method="POST">
+                <div class="form-group">
+                    <label for="title">Post Title:</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label>Select at least one category (hold ctrl for multiple select):</label>
+                    <select class="cat-box" name="categories[]" multiple required>
+                        <option value="action">Action</option>
+                        <option value="comedy">Comedy</option>
+                        <option value="drama">Drama</option>
+                        <option value="horror">Horror</option>
+                        <option value="thriller">Thriller</option>
+                        <option value="sci-fi">Sci-Fi</option>
+                        <option value="romance">romance</option>
+                        <option value="documentary">documentary</option>
+                        <option value="animation">animation</option>
+                    </select>                    
+                </div>
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea id="content" name="content" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Submit Post</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Forum. All rights reserved.</p>
+    </footer>
+</body>
+</html>

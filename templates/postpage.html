@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Home</title>
+    <link rel="stylesheet" href="static/postpage.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="welcome-message">
+            {{ if .IsAuthenticated }}
+                <h2>Welcome, {{ .User.Username }}</h2>
+            {{ else }}
+                <h2>Welcome, Guest</h2>
+            {{ end }}
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/">Home</a></li>
+            {{ if .IsAuthenticated }}
+                <li><a href="/post">Post</a></li>
+                <li><a href="/other">Other</a></li>
+            {{ else }}
+                <li><a href="/login">Login</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="main-content">
+        <div class="post">
+            <div class="post-meta">
+                <!-- Display post details -->
+                <a href="/" class="back-button">Go Back</a>
+                <h4 class="user-date">Posted by {{ .Post.Username }} <br>on {{ .Post.CreatedAt.Format "2 Jan 2006" }}</h4>
+                <p class="title">{{ .Post.Title }}</p>   
+                <p class="content">{{ .Post.Content}}</p>
+                <div class="features">
+                    <form action="/submit_comment" method="POST">
+                        <input type="hidden" name="post_id" value="{{ .Post.ID }}">
+                        <textarea class="comment-area" placeholder="write your comment here..." name="comment"></textarea>
+                        <button id="comment-button">Comment</button>
+                    </form>
+                    <form action="/like_post" method="POST">
+                        <input type="hidden" name="post_id" value="{{ .Post.ID }}">
+                        <button type="submit">Like Post</button>
+                    </form>
+                    <form action="/dislike_post" method="POST">
+                        <input type="hidden" name="post_id" value="{{ .Post.ID }}">
+                        <button type="submit" style="display: block;">Dislike Post</button>
+                    </form>
+                    {{ if and .IsAuthenticated (eq .User.ID .Post.User_ID) }}
+                    <form action="/delete_post" method="POST">
+                        <input type="hidden" name="post_id" value="{{ .Post.ID }}">
+                        <button type="submit" style="display: block;">Delete Post</button>
+                    </form>
+                    {{ end }}
+                    <p>Likes: {{ .Post.LikesCount }} | Dislikes: {{ .Post.DislikesCount }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Display comments -->
+        <div class="divider" id="divider"></div>
+        <div class="comment-list">
+            {{ if .Comments }}
+                {{ range .Comments }}
+                    <div class="comment">
+                        <p class="username-time">
+                            <span class="username">{{ .Username }} commented:</span>
+                            <span class="metadata">on {{ .CreatedAt.Format "Jan 2, 2006 at 3:04 PM" }}</span>
+                        </p>
+                        <p class="comment-content">{{ .Content }}</p>
+                        <form action="/like_comment" method="POST">
+                            <input type="hidden" name="comment_id" value="{{ .ID }}">
+                            <input type="hidden" name="post_id" value="{{ $.Post.ID }}">
+                            <button type="submit">Like Comment</button>
+                        </form>
+                        <form action="/dislike_comment" method="POST">
+                            <input type="hidden" name="comment_id" value="{{ .ID }}">
+                            <input type="hidden" name="post_id" value="{{ $.Post.ID }}">
+                            <button type="submit">Dislike Comment</button>
+                        </form>
+                        {{ if and $.IsAuthenticated (eq $.User.ID .UserID) }}
+                        <form action="/delete_comment" method="POST">
+                            <input type="hidden" name="comment_id" value="{{ .ID }}">
+                            <input type="hidden" name="post_id" value="{{ $.Post.ID }}">
+                            <button type="submit">Delete Comment</button>
+                        </form>
+                        {{ end }}
+                        <p>Likes: {{ .LikesCount }} | Dislikes: {{ .DislikesCount }}</p>
+                    </div>
+                {{ end }}
+            {{ else }}
+                <p>No comments</p>
+            {{ end }}
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 My Forum. All rights reserved.</p>
+    </footer>
+</body>
+</html>

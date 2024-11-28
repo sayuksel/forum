@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filtered Posts</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="welcome-message">
+            {{ if .IsAuthenticated }}
+                <h2>Welcome, {{ .User.Username }}</h2>
+            {{ else }}
+                <h2>Welcome, Guest</h2>
+            {{ end }}
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="/">Home</a></li>
+            {{ if .IsAuthenticated }}
+                <li><a href="/post">Post</a></li>
+                <li><a href="/logout">Logout</a></li>
+            {{ else }}
+                <li><a href="/login">Login</a></li>
+            {{ end }}
+        </ul>
+    </div>
+    <div class="main-content">
+        <header>
+            <div class="h2"><h2>Filter by Category</h2></div>
+            <div class="filters">
+                <a href="/?filter=category&value=action">Action</a>
+                <a href="/?filter=category&value=comedy">Comedy</a>
+                <a href="/?filter=category&value=drama">Drama</a>
+                <a href="/?filter=category&value=horror">Horror</a>
+                <a href="/?filter=category&value=thriller">Thriller</a>
+                <a href="/?filter=category&value=sci-fi">Sci-Fi</a>
+                <a href="/?filter=category&value=romance">Romance</a>
+                <a href="/?filter=category&value=documentary">Documentary</a>
+                <a href="/?filter=category&value=animation">Animation</a>
+                <a href="/">All</a>
+                <a href="/?filter=created_posts">My Posts</a>
+                <a href="/?filter=liked_posts">Liked Posts</a>
+            </div>
+        </header>
+        <main>
+            <div class="content-list">
+                <h2>Posts</h2>
+                <div class="divider"></div>
+                <div class="post-list">
+                    {{ if .Posts }}
+                        {{ range .Posts }}
+                            <article class="post">
+                                <div class="post-header">
+                                    <h3 class="post-title">{{ .Title }}</h3>
+                                    <p class="post-meta">Posted by {{ .Username }} on {{ .CreatedAt.Format "2, Jan , 2006" }}</p>
+                                </div>
+                                <p class="category">
+                                    Categories: {{ .Category }}
+                                </p>
+                                <p class="post-content">{{ .Content }}</p>
+                                <div class="features">
+                                    <a href="/postpage?id={{ .ID }}">
+                                        <button type="submit">View More Info</button>
+                                    </a>
+                                </div>
+                            </article>
+                            <div class="divider"></div>
+                        {{ end }}
+                    {{ else }}
+                        <p>No posts available for the selected filter.</p>
+                    {{ end }}
+                </div>
+            </div>
+        </main>
+        <footer>
+            <p>&copy; 2024 My Forum. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>

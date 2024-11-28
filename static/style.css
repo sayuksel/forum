@@ -1,0 +1,180 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: white;
+    color: #333;
+    display: flex; /* Allow for sidebar and main content */
+    flex-direction: column;
+}
+/* Sidebar styles */
+.sidebar {
+    background-color: #35424a;
+    color: #ffffff;
+    width: 250px;
+    padding: 20px;
+    position: fixed; /* Fixes the sidebar to the left */
+    height: 100vh; /* Full height */
+}
+.welcome-message {
+    margin-bottom: 20px;
+}
+.sidebar-menu {
+    list-style: none;
+}
+.sidebar-menu li {
+    gap: 1;
+    margin: 15px 0;
+}
+.sidebar-menu a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 10px;
+    display: block;
+    transition: background 0.3s ease;
+}
+.sidebar-menu a:hover {
+    background: #ffffff;
+    color: #35424a;
+    border-radius: 5px;
+}
+/* Main content styles */
+.main-content {
+    margin-left: 250px; 
+    padding: 20px;
+    width: calc(100% - 250px); 
+}
+header {
+    padding: 1rem 0;
+    text-align: center; 
+}
+h1.logo {
+    color: #35424a;
+    text-decoration: none;
+    font-size: 24px;
+}
+/* Main section styles */
+main {
+    text-align: center;
+}
+.hero {
+    background-color: #f4f4f4;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.hero p {
+    font-size: 18px;
+}
+.content-list h2 {
+    text-align: left;
+}
+.post-list article{
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: left;
+}
+.post-link {
+    text-decoration: none;
+    color: #333;
+}
+.post-list article:hover{
+    background-color: #f4f4f4;
+}
+.post-header {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+.post-meta {
+    font-size:0.9em;
+    color: #666; 
+    margin-left: 20px;
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.category {
+    margin-bottom: 10px;
+    font-size:0.9em;
+    color: #666;
+    background-color: #cfcdcd;
+    border-radius: 15px;
+    display: inline-flex;
+    padding: 4px;
+}
+.features button{
+    display: inline-flex;
+    align-items: center;
+    background-color: #cfcdcd;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    font-family: sans-serif;
+    font-size: 1em;
+    padding: 6px 12px;
+    margin: 10px 0;
+}
+.features button:hover{
+    background-color: #b8b7b7 ;
+}
+.divider {
+    height: 1px;
+    background-color: #ddd;
+    /* margin: 10px 0; */
+    width: 100%;
+}
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 15px 0;
+    background-color: #35424a;
+    color: #ffffff;
+    position: fixed;  /* Make the footer fixed */
+    bottom: 0;        /* Stick it to the bottom of the window */
+    left: 0;          /* Align to the left edge */
+    width: 100%;      /* Full width */
+    z-index: 1000;    /* Ensure it stays on top */
+}
+/* Style for the header filters */
+.filters {
+    display: flex;
+    flex-wrap: wrap; /* Ensures items wrap to the next line only if necessary */
+    gap: 15px; /* Space between filter items */
+    justify-content: center; /* Center the items in the container */
+    margin: 10px 0; /* Add spacing above and below */
+    padding: 10px; /* Optional padding for a cleaner layout */
+}
+.filters a {
+    text-decoration: none; /* Remove underline from links */
+    color: white; /* White text color */
+    background-color: #007BFF; /* Blue background color */
+    padding: 8px 12px; /* Add padding for clickable area */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Adjust text size */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+.filters a:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+/* Responsive Design for Smaller Screens */
+@media (max-width: 600px) {
+    .filters {
+        gap: 10px; /* Reduce spacing for smaller screens */
+    }
+}
+
